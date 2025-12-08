@@ -1,3 +1,5 @@
+case class State(position: Int, countOf0: Int)
+
 object Day1{
   def mod(a: Int, n: Int): Int = {
     val res = a % n
@@ -17,14 +19,41 @@ object Day1{
       case false => (nextPosition, countOf0)
     }
   }
- 
+
+  def completeMCyclesInRange(p: Int, a: Int, , m: Int): Int = {
+    a match {
+      case x if (p == 0 && a < 0) =>
+        ((a - b)/100).abs - 1
+      case x if (a == 0)          =>
+        ((a - b)/100).abs + 1
+      case _                      =>
+        ((a - b)/100).abs
+    }
+  }
+
+  def rotatePt2(state: State, rotation: String): State = {
+    println(s"Rotation: $rotation")
+    println(s"Current state: $state")
+    val nextRotation = rotation match {
+      case s"R$mag" => state.position + mag.toInt
+      case s"L$mag" => state.position - mag.toInt
+    }
+    println(s"p: ${state.position}")
+    println(s"a: $nextRotation")
+    val nextPosition = mod(nextRotation, 100)
+    println(s"b: $nextPosition")
+    val cycles = completeMCyclesInRange(state.position, nextRotation, nextPosition, 100)
+    println(s"The dial is rotated $rotation to point at $nextPosition with ${state.countOf0 + cycles} counts of 0")
+    State(nextPosition, state.countOf0 + cycles)
+  }
+
   def solveFile(filePath: String): Unit = {
-    scala.io.Source
+    println(scala.io.Source
       .fromFile(filePath)
-      .getLines
+      .getLines()
       .toList
-      .foldLeft((50, 0))(rotate)
-      ._2
+      .foldLeft(State(50, 0))(rotatePt2)
+      .countOf0)
   }
 
   def main(args: Array[String]): Unit = {
