@@ -20,30 +20,22 @@ object Day1{
     }
   }
 
-  def completeMCyclesInRange(p: Int, a: Int, , m: Int): Int = {
+  def completeMCyclesInRange(p: Int, a: Int): Int = {
     a match {
-      case x if (p == 0 && a < 0) =>
-        ((a - b)/100).abs - 1
-      case x if (a == 0)          =>
-        ((a - b)/100).abs + 1
-      case _                      =>
-        ((a - b)/100).abs
+      case x if (p != 0 && a <= 0) =>
+        (a/100).abs + 1
+      case x if (p == 0 || a > 0) =>
+        (a/100).abs
     }
   }
 
   def rotatePt2(state: State, rotation: String): State = {
-    println(s"Rotation: $rotation")
-    println(s"Current state: $state")
     val nextRotation = rotation match {
       case s"R$mag" => state.position + mag.toInt
       case s"L$mag" => state.position - mag.toInt
     }
-    println(s"p: ${state.position}")
-    println(s"a: $nextRotation")
     val nextPosition = mod(nextRotation, 100)
-    println(s"b: $nextPosition")
-    val cycles = completeMCyclesInRange(state.position, nextRotation, nextPosition, 100)
-    println(s"The dial is rotated $rotation to point at $nextPosition with ${state.countOf0 + cycles} counts of 0")
+    val cycles = completeMCyclesInRange(state.position, nextRotation)
     State(nextPosition, state.countOf0 + cycles)
   }
 
