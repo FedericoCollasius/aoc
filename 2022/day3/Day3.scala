@@ -1,4 +1,3 @@
-/*
 val part1 = scala.io.Source.fromFile("input.txt").getLines().toList
   .map{ l => 
     val length = l.length
@@ -13,7 +12,7 @@ val part1 = scala.io.Source.fromFile("input.txt").getLines().toList
       char.toInt - 38
   }
   .sum
-*/
+
 val part2 = scala.io.Source.fromFile("input.txt")
   .getLines()
   .toList
