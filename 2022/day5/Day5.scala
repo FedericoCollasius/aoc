@@ -9,7 +9,7 @@ var stacks= input(0).split("\n").dropRight(1).flatMap{line =>
     }
   }.groupMap(_._1)(_._2).toVector.sortBy(_._1).map(_._2.toList)
 
-val part1 = input(1).split("\n")
+val part2 = input(1).split("\n")
   .map{ lines =>
     lines match {
       case s"move $nStr from $fromStr to $toStr" =>
@@ -50,3 +50,5 @@ stacks.map(_.head).toString
 // val start: State = drawing.init.transpose.collect {
 //   case col if col.exists(_.isLetter) => col.mkString.stripLeading
 // }
+
+// For doing part1 add a `reverse` in line 19 
