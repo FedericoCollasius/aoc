@@ -1,0 +1,8 @@
+val part1 = io.Source.fromFile("sample.txt").mkString
+  .map{ inst match {
+    case s"$ cd $dir" => s"im cd for $dir"
+    case "$ ls" => "im ls" 
+    case s"dir $dir" => s"im a dir called $dir"
+    case s"$size $file" => s"im a file with size $size and name $file"
+    }
+  }
